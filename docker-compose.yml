@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  db:
+    image: cookme-db
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+    env_file: .env
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    command: "-p ${POSTGRES_PORT}"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -p ${POSTGRES_PORT} -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 0s
+  app:
+    image: cookme-back
+    build:
+      context: .
+      dockerfile: Dockerfile
+    port:
+      - 3000:3000
+    depends_on:
+      db:
+        condition: service_healthy
+#docker compose --env-file .env up
