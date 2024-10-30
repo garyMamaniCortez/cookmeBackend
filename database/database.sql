@@ -1,6 +1,5 @@
 CREATE DATABASE cookme;
-USE recetas;
-
+USE cookme;
 CREATE TABLE Usuario (
     id_usuario INT PRIMARY KEY AUTO_INCREMENT,
     nombre_usuario VARCHAR(50) NOT NULL,
@@ -8,7 +7,33 @@ CREATE TABLE Usuario (
     apellido VARCHAR(50) NOT NULL,
     correo_electronico VARCHAR(100) NOT NULL UNIQUE,
     contraseña VARCHAR(255) NOT NULL,
-    listas_compra TEXT, -- Almacena una lista de listas de compras
+    listas_compra TEXT 
+);
+
+CREATE TABLE Categoria (
+    id_categoria INT PRIMARY KEY AUTO_INCREMENT,
+    nombre_categoria VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Receta (
+    id_receta INT PRIMARY KEY AUTO_INCREMENT,
+    nombre_receta VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    instrucciones TEXT,
+    tiempo_preparacion INT,
+    tiempo_coccion INT,
+    imagen mediumblob,
+    id_categoria INT,
+    id_usuario INT,
+    FOREIGN KEY (id_categoria) REFERENCES Categoria(id_categoria),
+    FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
+);
+
+CREATE TABLE Receta_Favorita (
+    id_usuario INT,
+    id_receta INT,
+    FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario),
+    FOREIGN KEY (id_receta) REFERENCES Receta(id_receta)
 );
 
 CREATE TABLE Historial_Busqueda (
@@ -19,11 +44,9 @@ CREATE TABLE Historial_Busqueda (
     FOREIGN KEY (id_receta) REFERENCES Receta(id_receta)
 );
 
-CREATE TABLE Receta_Favorita (
-    id_usuario INT,
-    id_receta INT,
-    FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario),
-    FOREIGN KEY (id_receta) REFERENCES Receta(id_receta)
+CREATE TABLE Ingrediente (
+    id_ingrediente INT PRIMARY KEY AUTO_INCREMENT,
+    nombre_ingrediente VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE Preferencia_Culinaria (
@@ -34,24 +57,11 @@ CREATE TABLE Preferencia_Culinaria (
     FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
 );
 
-CREATE TABLE Receta (
-    id_receta INT PRIMARY KEY AUTO_INCREMENT,
-    nombre_receta VARCHAR(100) NOT NULL,
-    descripcion TEXT,
-    instrucciones TEXT,
-    tiempo_preparacion INT,--minutos
-    tiempo_coccion INT,--minutos
-    imagen mediumblob,
-    id_categoria INT,
-    id_usuario INT,
-    FOREIGN KEY (id_categoria) REFERENCES Categoria(id_categoria),
-    FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
+CREATE TABLE Propiedad (
+    id_propiedad INT PRIMARY KEY AUTO_INCREMENT,
+    nombre_propiedad VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE Ingrediente (
-    id_ingrediente INT PRIMARY KEY AUTO_INCREMENT,
-    nombre_ingrediente VARCHAR(50) NOT NULL
-);
 
 CREATE TABLE Propiedad_Ingrediente (
     id_ingrediente INT,
@@ -60,10 +70,6 @@ CREATE TABLE Propiedad_Ingrediente (
     FOREIGN KEY (id_propiedad) REFERENCES Propiedad(id_propiedad)
 );
 
-CREATE TABLE Propiedad (
-    id_propiedad INT PRIMARY KEY AUTO_INCREMENT,
-    nombre_propiedad VARCHAR(100) NOT NULL
-);
 
 CREATE TABLE Receta_Ingrediente (
     id_receta INT,
@@ -73,10 +79,6 @@ CREATE TABLE Receta_Ingrediente (
     FOREIGN KEY (id_ingrediente) REFERENCES Ingrediente(id_ingrediente)
 );
 
-CREATE TABLE Categoria (
-    id_categoria INT PRIMARY KEY AUTO_INCREMENT,
-    nombre_categoria VARCHAR(50) NOT NULL
-);
 
 CREATE TABLE Comentario (
     id_comentario INT PRIMARY KEY AUTO_INCREMENT,
