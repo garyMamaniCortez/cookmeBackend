@@ -3,29 +3,37 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('Receta_Ingrediente', {
+    await queryInterface.createTable('Valoracion', {
+      id_valoracion: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
       id_receta: {
         allowNull: false,
-        primaryKey: true,
         type: Sequelize.INTEGER,
         references: {
           model: 'Receta',
           key: 'id_receta'
         }
       },
-      id_ingrediente: {
+      id_usuario: {
         allowNull: false,
-        primaryKey: true,
         type: Sequelize.INTEGER,
         references: {
-          model: 'Ingrediente',
-          key: 'id_ingrediente'
+          model: 'Usuario',
+          key: 'id_usuario'
         }
+      },
+      valoracion: {
+        allowNull: false,
+        type: Sequelize.INTEGER
       }
     });
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('Receta_Ingrediente');
+    await queryInterface.dropTable('Valoracion');
   }
 };

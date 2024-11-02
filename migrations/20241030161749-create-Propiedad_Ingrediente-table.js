@@ -3,20 +3,29 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    /**
-     * Add altering commands here.
-     *
-     * Example:
-     * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
-     */
+    await queryInterface.createTable('Propiedad_Ingrediente', {
+      id_propiedad: {
+        allowNull: false,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Propiedad',
+          key: 'id_propiedad'
+        }
+      },
+      id_ingrediente: {
+        allowNull: false,
+        primaryKey: true,
+        type: Sequelize.INTEGER,        
+        references: {
+          model: 'Ingrediente',
+          key: 'id_ingrediente'
+        }
+      },
+    });
   },
 
   async down (queryInterface, Sequelize) {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
+    await queryInterface.dropTable('Propiedad_Ingrediente');
   }
 };

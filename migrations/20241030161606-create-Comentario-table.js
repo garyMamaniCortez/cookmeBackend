@@ -3,15 +3,12 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('Historial_Busqueda', {
-      id_usuario: {
+    await queryInterface.createTable('Comentario', {
+      id_comentario: {
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Usuario',
-          key: 'id_usuario'
-        }
+        type: Sequelize.INTEGER
       },
       id_receta: {
         allowNull: false,
@@ -21,7 +18,15 @@ module.exports = {
           key: 'id_receta'
         }
       },
-      busqueda: {
+      id_usuario: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Usuario',
+          key: 'id_usuario'
+        }
+      },
+      comentario: {
         allowNull: false,
         type: Sequelize.STRING
       },
@@ -31,8 +36,8 @@ module.exports = {
       }
     });
   },
+
   async down (queryInterface, Sequelize) {
-    
-    await queryInterface.dropTable('Historial_Busqueda');    
+    await queryInterface.dropTable('Comentario');
   }
 };
