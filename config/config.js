@@ -7,8 +7,7 @@ module.exports = {
     database: process.env.POSTGRES_DB,
     host: process.env.POSTGRES_HOST, 
     port: process.env.POSTGRES_PORT,
-    dialect: 'postgres',
-    logging: false
+    dialect: 'postgres'
   },
   test: {
     username: process.env.POSTGRES_USER,
@@ -16,8 +15,7 @@ module.exports = {
     database: process.env.POSTGRES_DB,
     host: process.env.POSTGRES_HOST, 
     port: process.env.POSTGRES_PORT,
-    dialect: 'postgres',
-    logging: false
+    dialect: 'postgres'
   },
   production: {
     username: process.env.POSTGRES_USER,
@@ -25,7 +23,6 @@ module.exports = {
     database: process.env.POSTGRES_DB,
     host: process.env.POSTGRES_HOST, 
     port: process.env.POSTGRES_PORT,
-    dialect: 'postgres',
-    logging: false
+    dialect: 'postgres'
   }
 };
