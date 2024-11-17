@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-  const Receta_Ingrediente = sequelize.define('Receta_Ingrediente', {
+  const Receta_Ingrediente = sequelize.define('receta_ingrediente', {
     id_receta: {
       allowNull: false,
       primaryKey: true,
@@ -13,15 +13,15 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER
     }
   }, {
-    tableName: 'Receta_Ingrediente',
+    tableName: 'receta_ingrediente',
     timestamps: false
   });
   Receta_Ingrediente.associate = function(models) {
-    Receta_Ingrediente.belongsTo(models.Receta, {
+    Receta_Ingrediente.belongsTo(models.receta, {
       foreignKey: 'id_receta',
       as: 'receta'
     });
-    Receta_Ingrediente.belongsTo(models.Ingrediente, {
+    Receta_Ingrediente.belongsTo(models.ingrediente, {
       foreignKey: 'id_ingrediente',
       as: 'ingrediente'
     });

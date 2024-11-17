@@ -1,11 +1,9 @@
 'use strict';
 
-const { DataTypes } = require('sequelize');
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('Receta', {
+    await queryInterface.createTable('receta', {
       id_receta: {
         allowNull: false,
         autoIncrement: true,
@@ -13,42 +11,42 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       nombre_receta: {
-        allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       descripcion: {
-        allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       instrucciones: {
-        allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       tiempo_preparacion: {
-        allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       tiempo_coccion: {
-        allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       imagen: {
-        allowNull: false,
-        type: Sequelize.STRING // Ubicacion de la imagen
+        type: Sequelize.STRING,
+        allowNull: false
       },
       id_categoria: {
-        allowNull: false,
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
-          model: 'Categoria',
+          model: 'categoria',
           key: 'id_categoria'
         }
       },
       id_usuario: {
-        allowNull: false,
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
-          model: 'Usuario',
+          model: 'usuario',
           key: 'id_usuario'
         }
       }
@@ -56,6 +54,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('Receta');
+    await queryInterface.dropTable('receta');
   }
 };

@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-  const Receta = sequelize.define('Receta', {
+  const Receta = sequelize.define('receta', {
     id_receta: {
       allowNull: false,
       autoIncrement: true,
@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     imagen: {
       allowNull: false,
-      type: DataTypes.STRING // Ubicacion de la imagen
+      type: DataTypes.STRING
     },
     id_categoria: {
       allowNull: false,
@@ -41,15 +41,15 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
     }
   }, {
-    tableName: 'Receta',
+    tableName: 'receta',
     timestamps: false
   });
   Receta.associate = function(models) {
-    Receta.belongsTo(models.Categoria, {
+    Receta.belongsTo(models.categoria, {
       foreignKey: 'id_categoria',
       as: 'categoria'
     });
-    Receta.belongsTo(models.Usuario, {
+    Receta.belongsTo(models.usuario, {
       foreignKey: 'id_usuario',
       as: 'usuario'
     });

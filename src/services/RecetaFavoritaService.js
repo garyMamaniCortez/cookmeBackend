@@ -1,26 +1,39 @@
-const {RecetaFavorita} = require('../../models');
+const {receta_favorita} = require('../../models');
 
 module.exports = {
-    async createRecetaFavorita(recetaFavorita){
-        return RecetaFavorita.create(recetaFavorita);
+    async createRecetaFavorita(datosRF){
+        return receta_favorita.create(datosRF);
     },
     async getAllRecetasFavoritas(){
-        return RecetaFavorita.findAll();
+        return receta_favorita.findAll();
     },
-    async getRecetaFavoritaById(id){
-        return RecetaFavorita.findByPk(id);
-    },
-    async updateRecetaFavorita(id, recetaFavorita){
-        return RecetaFavorita.update(recetaFavorita, {
+    async getRecetaFavoritaPorUsuario(id_usuario){
+        return receta_favorita.findAll({
             where: {
-                id
+                id_usuario
             }
         });
     },
-    async deleteRecetaFavorita(id){
-        return RecetaFavorita.destroy({
+    async getRecetaFavoritaPorReceta(id_receta){
+        return receta_favorita.findAll({
             where: {
-                id
+                id_receta
+            }
+        });
+    },
+    async getRecetaFavorita(id_receta, id_usuario){
+        return receta_favorita.findOne({
+            where: {
+                id_receta,
+                id_usuario
+            }
+        });
+    },
+    async deleteRecetaFavorita(id_receta, id_usuario){
+        return receta_favorita.destroy({
+            where: {
+                id_receta,
+                id_usuario
             }
         });
     }

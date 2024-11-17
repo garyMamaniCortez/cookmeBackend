@@ -1,24 +1,24 @@
-const {Valoracion} = require('../../models');
+const {valoracion} = require('../../models');
 
 module.exports = {
-    async createValoracion(valoracion){
-        return Valoracion.create(valoracion);
+    async createValoracion(datosValoracion){
+        return valoracion.create(datosValoracion);
     },
     async getAllValoraciones(){
-        return Valoracion.findAll();
+        return valoracion.findAll();
     },
     async getValoracionById(id){
-        return Valoracion.findByPk(id);
+        return valoracion.findByPk(id);
     },
-    async updateValoracion(id, valoracion){
-        return Valoracion.update(valoracion, {
+    async updateValoracion(id, datosValoracion){
+        return valoracion.update(datosValoracion, {
             where: {
                 id_valoracion: id
             }
         });
     },
     async deleteValoracion(id){
-        return Valoracion.destroy({
+        return valoracion.destroy({
             where: {
                 id_valoracion: id
             }

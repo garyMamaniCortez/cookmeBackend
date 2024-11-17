@@ -1,22 +1,36 @@
-const {Preferencia_Culinaria} = require('../../models');
+const {preferencia_culinaria} = require('../../models');
 
 module.exports = {
-    async createPreferenciaCulinaria(preferenciaCulinaria) {
-        return Preferencia_Culinaria.create(preferenciaCulinaria);
+    async createPreferenciaCulinaria(datosPC) {
+        return preferencia_culinaria.create(datosPC);
     },
     async getPreferenciasCulinarias() {
-        return Preferencia_Culinaria.findAll();
+        return preferencia_culinaria.findAll();
+    },
+    async getPreferenciaCulinariaPorUsuario(id) {
+        return preferencia_culinaria.findAll({
+            where: {
+                id_usuario : id
+            }
+        });
+    },
+    async getPreferenciaCulinariaPorIngrediente(id) {
+        return preferencia_culinaria.findAll({
+            where: {
+                id_ingrediente : id
+            }
+        });
     },
     async getPreferenciaCulinaria(id_usuario, id_ingrediente) {
-        return Preferencia_Culinaria.findOne({
+        return preferencia_culinaria.findOne({
             where: {
                 id_usuario,
                 id_ingrediente
             }
         });
     },
-    async updatePreferenciaCulinaria(id_usuario, id_ingrediente, preferenciaCulinaria) {
-        return Preferencia_Culinaria.update(preferenciaCulinaria, {
+    async updatePreferenciaCulinaria(id_usuario, id_ingrediente, datosPC) {
+        return preferencia_culinaria.update(datosPC, {
             where: {
                 id_usuario,
                 id_ingrediente
@@ -24,7 +38,7 @@ module.exports = {
         });
     },
     async deletePreferenciaCulinaria(id_usuario, id_ingrediente) {
-        return Preferencia_Culinaria.destroy({
+        return preferencia_culinaria.destroy({
             where: {
                 id_usuario,
                 id_ingrediente

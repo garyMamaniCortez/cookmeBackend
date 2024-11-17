@@ -1,26 +1,26 @@
-const {Receta} = require('../../models');
+const {receta} = require('../../models');
 
 module.exports = {
-    async createReceta(receta){
-        return Receta.create(receta);
+    async createReceta(datosReceta){
+        return receta.create(datosReceta);
     },
     async getAllRecetas(){
-        return Receta.findAll();
+        return receta.findAll();
     },
     async getRecetaById(id){
-        return Receta.findByPk(id);
+        return receta.findByPk(id);
     },
-    async updateReceta(id, receta){
-        return Receta.update(receta, {
+    async updateReceta(id, datosReceta){
+        return receta.update(datosReceta, {
             where: {
-                id
+                id_receta: id
             }
         });
     },
     async deleteReceta(id){
-        return Receta.destroy({
+        return receta.destroy({
             where: {
-                id
+                id_receta: id
             }
         });
     }

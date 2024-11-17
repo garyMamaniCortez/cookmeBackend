@@ -1,33 +1,36 @@
-const {Propiedad_Ingrediente} = require('../../models');
+const {propiedad_ingrediente} = require('../../models');
 
 module.exports = {
-    async createPropiedadIngrediente(propiedad_ingrediente) {
-        return Propiedad_Ingrediente.create(propiedad_ingrediente);
+    async createPropiedadIngrediente(datosPI) {
+        return propiedad_ingrediente.create(datosPI);
+    },
+    async getAllPropiedadIngredientes() {
+        return propiedad_ingrediente.findAll();
+    },
+    async getPropiedadIngredientePorPropiedad(id_propiedad) {
+        return propiedad_ingrediente.findAll({
+            where: {
+                id_propiedad
+            }
+        });
+    },
+    async getPropiedadIngredientePorIngrediente(id_ingrediente) {
+        return propiedad_ingrediente.findAll({
+            where: {
+                id_ingrediente
+            }
+        });
     },
     async getPropiedadIngrediente(id_propiedad, id_ingrediente) {
-        return Propiedad_Ingrediente.findOne({
+        return propiedad_ingrediente.findOne({
             where: {
                 id_propiedad,
                 id_ingrediente
             }
         });
     },
-    async getIngredienteId(id_ingrediente) {
-        return Propiedad_Ingrediente.findAll({
-            where: {
-                id_ingrediente
-            }
-        });
-    },
-    async getPropiedadId(id_propiedad) {
-        return Propiedad_Ingrediente.findAll({
-            where: {
-                id_propiedad
-            }
-        });
-    },
-    async updatePropiedadIngrediente(id_propiedad, id_ingrediente, propiedad_ingrediente) {
-        return Propiedad_Ingrediente.update(propiedad_ingrediente, {
+    async updatePropiedadIngrediente(id_propiedad, id_ingrediente, datosPI) {
+        return propiedad_ingrediente.update(datosPI, {
             where: {
                 id_propiedad,
                 id_ingrediente
@@ -35,7 +38,7 @@ module.exports = {
         });
     },
     async deletePropiedadIngrediente(id_propiedad, id_ingrediente) {
-        return Propiedad_Ingrediente.destroy({
+        return propiedad_ingrediente.destroy({
             where: {
                 id_propiedad,
                 id_ingrediente

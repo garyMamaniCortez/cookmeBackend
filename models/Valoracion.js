@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-  const Valoracion = sequelize.define('Valoracion', {
+  const Valoracion = sequelize.define('valoracion', {
     id_valoracion: {
       allowNull: false,
       autoIncrement: true,
@@ -21,15 +21,17 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER
     }
   }, {
-    tableName: 'Valoracion',
+    tableName: 'valoracion',
     timestamps: false
   });
   Valoracion.associate = function(models) {
-    Valoracion.belongsTo(models.Receta, {
-      foreignKey: 'id_receta'
+    Valoracion.belongsTo(models.receta, {
+      foreignKey: 'id_receta',
+      as: 'receta'
     });
-    Valoracion.belongsTo(models.Usuario, {
-      foreignKey: 'id_usuario'
+    Valoracion.belongsTo(models.usuario, {
+      foreignKey: 'id_usuario',
+      as: 'usuario'
     });
   };
   return Valoracion;

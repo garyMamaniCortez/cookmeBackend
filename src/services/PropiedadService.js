@@ -1,24 +1,24 @@
-const {Propiedad} = require('../../models');
+const {propiedad} = require('../../models');
 
 module.exports = {
-    async create(propiedad) {
-        return Propiedad.create(propiedad);
+    async create(dataPropiedad) {
+        return propiedad.create(dataPropiedad);
     },
     async findAll() {
-        return Propiedad.findAll();
+        return propiedad.findAll();
     },
     async findById(id) {
-        return Propiedad.findByPk(id);
+        return propiedad.findByPk(id);
     },
-    async update(id, propiedad) {
-        return Propiedad.update(propiedad, {
+    async update(id, dataPropiedad) {
+        return propiedad.update(dataPropiedad, {
         where: {
             id_propiedad: id
         }
         });
     },
     async delete(id) {
-        return Propiedad.destroy({
+        return propiedad.destroy({
         where: {
             id_propiedad: id
         }

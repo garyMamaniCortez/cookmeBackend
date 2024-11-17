@@ -17,6 +17,22 @@ module.exports = {
             res.status(400).send({ message: error.message })
         }
     },
+    async getPreferenciaCulinariaPorUsuario(req, res) {
+        try {
+            const preferenciasCulinarias = await PreferenciaCulinariaService.getPreferenciaCulinariaPorUsuario(req.params.id_usuario)
+            res.status(200).send(preferenciasCulinarias)
+        } catch (error) {
+            res.status(400).send({ message: error.message })
+        }
+    },
+    async getPreferenciaCulinariaPorIngrediente(req, res) {
+        try {
+            const preferenciasCulinarias = await PreferenciaCulinariaService.getPreferenciaCulinariaPorIngrediente(req.params.id_ingrediente)
+            res.status(200).send(preferenciasCulinarias)
+        } catch (error) {
+            res.status(400).send({ message: error.message })
+        }
+    },
     async getPreferenciaCulinaria(req, res) {
         try {
             const preferenciaCulinaria = await PreferenciaCulinariaService.getPreferenciaCulinaria(req.params.id_usuario, req.params.id_ingrediente)

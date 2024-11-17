@@ -1,33 +1,34 @@
-const {Tecnica_Receta} = require('../../models');
+const {tecnica_receta} = require('../../models');
 
 module.exports = {
-    async createTecnicaReceta(tecnicaReceta) {
-        return await Tecnica_Receta.create(tecnicaReceta);
+    async createTecnicaReceta(datosTR) {
+        return await tecnica_receta.create(datosTR);
     },
     async getTecnicaRecetas() {
-        return await Tecnica_Receta.findAll();
+        return await tecnica_receta.findAll();
     },
-    async getTecnicaRecetaId(idTecnica, idReceta) {
-        return await Tecnica_Receta.findOne({
+    async getTecnicaRecetaById(id_tecnica, id_receta) {
+        return await tecnica_receta.findByPk(id_tecnica, id_receta);
+    },
+    async getTecnicaRecetaPorTecnica(id_tecnica) {
+        return await tecnica_receta.findAll({
             where: {
-                id_tecnica: idTecnica,
-                id_receta: idReceta
+                id_tecnica
             }
         });
     },
-    async updateTecnicaReceta(tecnicaReceta) {
-        return await Tecnica_Receta.update(tecnicaReceta, {
+    async getTecnicaRecetaPorReceta(id_receta) {
+        return await tecnica_receta.findAll({
             where: {
-                id_tecnica: tecnicaReceta.id_tecnica,
-                id_receta: tecnicaReceta.id_receta
+                id_receta
             }
         });
-    },
-    async deleteTecnicaReceta(idTecnica, idReceta) {
-        return await Tecnica_Receta.destroy({
+    }, 
+    async deleteTecnicaReceta(id_tecnica, id_receta) {
+        return await tecnica_receta.destroy({
             where: {
-                id_tecnica: idTecnica,
-                id_receta: idReceta
+                id_tecnica,
+                id_receta
             }
         });
     }

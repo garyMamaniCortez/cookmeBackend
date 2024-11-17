@@ -1,14 +1,28 @@
-const {Receta_Ingrediente} = require('../../models');
+const {receta_ingrediente} = require('../../models');
 
 module.exports = {
     async createRecetaIngrediente(recetaIngrediente) {
-        return Receta_Ingrediente.create(recetaIngrediente);
+        return receta_ingrediente.create(recetaIngrediente);
     },
     async getAllRecetaIngredientes() {
-        return Receta_Ingrediente.findAll();
+        return receta_ingrediente.findAll();
+    },
+    async getRecetaIngredientePorReceta(id_receta) {
+        return receta_ingrediente.findAll({
+            where: {
+                id_receta
+            }
+        });
+    },
+    async getRecetaIngredientePorIngrediente(id_ingrediente) {
+        return receta_ingrediente.findAll({
+            where: {
+                id_ingrediente
+            }
+        });
     },
     async getRecetaIngrediente(id_receta, id_ingrediente) {
-        return Receta_Ingrediente.findOne({
+        return receta_ingrediente.findOne({
             where: {
                 id_receta,
                 id_ingrediente
@@ -16,7 +30,7 @@ module.exports = {
         });
     },
     async deleteRecetaIngrediente(id_receta, id_ingrediente) {
-        return Receta_Ingrediente.destroy({
+        return receta_ingrediente.destroy({
             where: {
                 id_receta,
                 id_ingrediente

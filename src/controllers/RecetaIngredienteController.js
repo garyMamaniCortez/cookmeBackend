@@ -17,6 +17,22 @@ module.exports = {
             res.status(400).send(error);
         }
     },
+    async getRecetaIngredientePorReceta(req, res) {
+        try {
+            const recetaIngredientes = await RecetaIngredienteService.getRecetaIngredientePorReceta(req.params.id_receta);
+            res.status(200).send(recetaIngredientes);
+        } catch (error) {
+            res.status(400).send(error);
+        }
+    },
+    async getRecetaIngredientePorIngrediente(req, res) {
+        try {
+            const recetaIngredientes = await RecetaIngredienteService.getRecetaIngredientePorIngrediente(req.params.id_ingrediente);
+            res.status(200).send(recetaIngredientes);
+        } catch (error) {
+            res.status(400).send(error);
+        }
+    },
     async getRecetaIngrediente(req, res) {
         try {
             const recetaIngrediente = await RecetaIngredienteService.getRecetaIngrediente(req.params.id_receta, req.params.id_ingrediente);

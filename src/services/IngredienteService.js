@@ -1,26 +1,26 @@
-const {Ingrediente} = require('../../models');
+const {ingrediente} = require('../../models');
 
 module.exports = {
-    async createIngrediente(ingrediente){
-        return Ingrediente.create(ingrediente);
+    async createIngrediente(datosIngrediente) {
+        return ingrediente.create(datosIngrediente);
     },
-    async getAllIngredientes(){
-        return Ingrediente.findAll();
+    async getAllIngrediente() {
+        return ingrediente.findAll();
     },
-    async getIngredienteById(id){
-        return Ingrediente.findByPk(id);
+    async getIngrediente(id) {
+        return ingrediente.findByPk(id);
     },
-    async updateIngrediente(id, ingrediente){
-        return Ingrediente.update(ingrediente, {
+    async updateIngrediente(id, datosIngrediente) {
+        return ingrediente.update(datosIngrediente, {
             where: {
-                id
+                id_ingrediente: id
             }
         });
     },
-    async deleteIngrediente(id){
-        return Ingrediente.destroy({
+    async deleteIngrediente(id) {
+        return await ingrediente.destroy({
             where: {
-                id
+                id_ingrediente: id
             }
         });
     }

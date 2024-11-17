@@ -1,32 +1,24 @@
-const {Tecnica} = require('../../models');
+const {tecnica} = require('../../models');
 
 module.exports = {
-    async CreateTecnica(){
-        return await Tecnica.create({
-            nombre_tecnica: 'nombre',
-            descripcion_tecnica: 'descripcion',
-            enlace_tutorial: 'enlace'
-        });
+    async CreateTecnica(datosTecnica){
+        return tecnica.create(datosTecnica);
     },
     async FindAllTecnicas(){
-        return await Tecnica.findAll();
+        return await tecnica.findAll();
     },
     async FindTecnicaById(id){
-        return await Tecnica.findByPk(id);
+        return await tecnica.findByPk(id);
     },
-    async UpdateTecnica(id){
-        return await Tecnica.update({
-            nombre_tecnica: 'nombre',
-            descripcion_tecnica: 'descripcion',
-            enlace_tutorial: 'enlace'
-        },{
+    async UpdateTecnica(id, datosTecnica){
+        return await tecnica.update(datosTecnica, {
             where: {
                 id_tecnica: id
             }
         });
     },
     async DeleteTecnica(id){
-        return await Tecnica.destroy({
+        return await tecnica.destroy({
             where: {
                 id_tecnica: id
             }

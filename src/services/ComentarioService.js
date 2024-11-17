@@ -1,26 +1,26 @@
-const {Comentario} = require('../../models');
+const {comentario} = require('../../models');
 
 module.exports = {
-    async createComentario(comentario){
-        return Comentario.create(comentario);
+    async createComentario(datosComentario){
+        return comentario.create(datosComentario);
     },
     async getAllComentarios(){
-        return Comentario.findAll();
+        return comentario.findAll();
     },
     async getComentarioById(id){
-        return Comentario.findByPk(id);
+        return comentario.findByPk(id);
     },
-    async updateComentario(id, comentario){
-        return Comentario.update(comentario, {
+    async updateComentario(id, datosComentario){
+        return comentario.update(datosComentario, {
             where: {
-                id
+                id_comentario: id
             }
         });
     },
     async deleteComentario(id){
-        return Comentario.destroy({
+        return comentario.destroy({
             where: {
-                id
+                id_comentario: id
             }
         });
     }    

@@ -1,13 +1,21 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-  const Historial_Busqueda = sequelize.define('Historial_Busqueda', {
+  const Historial_Busqueda = sequelize.define('historial_busqueda', {
+    id_historial_busqueda: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER
+    },
     id_usuario: {
       allowNull: false,
+      primaryKey: true,
       type: DataTypes.INTEGER
     },
     id_receta: {
       allowNull: false,
+      primaryKey: true,
       type: DataTypes.INTEGER
     },
     busqueda: {
@@ -16,18 +24,19 @@ module.exports = (sequelize, DataTypes) => {
     },
     fecha: {
       allowNull: false,
-      type: DataTypes.DATE
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW
     }
   }, {
-    tableName: 'Historial_Busqueda',
+    tableName: 'historial_busqueda',
     timestamps: false
   });
   Historial_Busqueda.associate = function(models) {
-    Historial_Busqueda.belongsTo(models.Usuario, {
+    Historial_Busqueda.belongsTo(models.usuario, {
       foreignKey: 'id_usuario',
       as: 'usuario'
     });
-    Historial_Busqueda.belongsTo(models.Receta, {
+    Historial_Busqueda.belongsTo(models.receta, {
       foreignKey: 'id_receta',
       as: 'receta'
     });
