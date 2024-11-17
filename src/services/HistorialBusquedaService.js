@@ -1,26 +1,26 @@
-const {Historial_Busqueda} = require('../../models');
+const {historial_busqueda} = require('../../models');
 
 module.exports = {
-    async createHistorialBusqueda(id_usuario, id_receta, busqueda, fecha) {
-        return await Historial_Busqueda.create({id_usuario, id_receta, busqueda, fecha});
+    async createHistorialBusqueda(datosHB) {
+        return historial_busqueda.create(datosHB);
     },
     async getAllHistorialBusqueda() {
-        return await Historial_Busqueda.findAll();
+        return historial_busqueda.findAll();
     },
     async getHistorialBusquedaById(id) {
-        return await Historial_Busqueda.findByPk(id);
+        return historial_busqueda.findByPk(id);
     },
-    async updateHistorialBusqueda(id, historialBusqueda) {
-        return await Historial_Busqueda.update(historialBusqueda, {
+    async updateHistorialBusqueda(id, datosHB) {
+        return historial_busqueda.update(datosHB, {
             where: {
-                id
+                id_historial_busqueda: id
             }
         });
     },
     async deleteHistorialBusqueda(id) {
-        return await Historial_Busqueda.destroy({
+        return historial_busqueda.destroy({
             where: {
-                id
+                id_historial_busqueda: id
             }
         });
     }

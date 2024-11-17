@@ -9,25 +9,33 @@ module.exports = {
             res.status(400).send({message: error.message});
         }
     },
+    async getAllPropiedadIngredientes(req, res) {
+        try {
+            const propiedad_ingredientes = await PropiedadIngredienteService.getAllPropiedadIngredientes();
+            res.status(200).send(propiedad_ingredientes);
+        } catch (error) {
+            res.status(400).send({message: error.message});
+        }
+    },
+    async getPropiedadIngredientePorPropiedad(req, res) {
+        try {
+            const propiedad_ingredientes = await PropiedadIngredienteService.getPropiedadIngredientePorPropiedad(req.params.id_propiedad);
+            res.status(200).send(propiedad_ingredientes);
+        } catch (error) {
+            res.status(400).send({message: error.message});
+        }
+    },
+    async getPropiedadIngredientePorIngrediente(req, res) {
+        try {
+            const propiedad_ingredientes = await PropiedadIngredienteService.getPropiedadIngredientePorIngrediente(req.params.id_ingrediente);
+            res.status(200).send(propiedad_ingredientes);
+        } catch (error) {
+            res.status(400).send({message: error.message});
+        }
+    },
     async getPropiedadIngrediente(req, res) {
         try {
             const propiedad_ingrediente = await PropiedadIngredienteService.getPropiedadIngrediente(req.params.id_propiedad, req.params.id_ingrediente);
-            res.status(200).send(propiedad_ingrediente);
-        } catch (error) {
-            res.status(400).send({message: error.message});
-        }
-    },
-    async getIngredienteId(req, res) {
-        try {
-            const propiedad_ingrediente = await PropiedadIngredienteService.getIngredienteId(req.params.id_ingrediente);
-            res.status(200).send(propiedad_ingrediente);
-        } catch (error) {
-            res.status(400).send({message: error.message});
-        }
-    },
-    async getPropiedadId(req, res) {
-        try {
-            const propiedad_ingrediente = await PropiedadIngredienteService.getPropiedadId(req.params.id_propiedad);
             res.status(200).send(propiedad_ingrediente);
         } catch (error) {
             res.status(400).send({message: error.message});

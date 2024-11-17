@@ -2,10 +2,11 @@ const express = require('express');
 const router  = express.Router();
 const PreferenciaCulinariaController = require('../controllers/PreferenciaCulinariaController');
 
-router.post('/preferencias-culinarias', PreferenciaCulinariaController.createPreferenciaCulinaria);
-router.get('/preferencias-culinarias', PreferenciaCulinariaController.getPreferenciasCulinarias);
-router.get('/preferencias-culinarias/:id_usuario/:id_ingrediente', PreferenciaCulinariaController.getPreferenciaCulinaria);
-router.put('/preferencias-culinarias/:id_usuario/:id_ingrediente', PreferenciaCulinariaController.updatePreferenciaCulinaria);
-router.delete('/preferencias-culinarias/:id_usuario/:id_ingrediente', PreferenciaCulinariaController.deletePreferenciaCulinaria);
+router.post('/preferencia-culinaria', PreferenciaCulinariaController.createPreferenciaCulinaria);
+router.get('/preferencia-culinaria', PreferenciaCulinariaController.getPreferenciasCulinarias);
+router.get('/preferencia-culinaria-usuario/:id_usuario', PreferenciaCulinariaController.getPreferenciaCulinariaPorUsuario);
+router.get('/preferencia-culinaria-ingrediente/:id_ingrediente', PreferenciaCulinariaController.getPreferenciaCulinariaPorIngrediente);
+router.get('/preferencia-culinaria/:id_usuario/:id_ingrediente', PreferenciaCulinariaController.getPreferenciaCulinaria);
+router.delete('/preferencia-culinaria/:id_usuario/:id_ingrediente', PreferenciaCulinariaController.deletePreferenciaCulinaria);
 
 module.exports = router;

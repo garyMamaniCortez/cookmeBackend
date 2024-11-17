@@ -3,21 +3,21 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('Propiedad', {
+    await queryInterface.createTable('propiedad', { 
       id_propiedad: {
-        allowNull: false,
-        autoIncrement: true,
+        type: Sequelize.INTEGER,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        autoIncrement: true,
+        allowNull: false
       },
       nombre_propiedad: {
-        allowNull: false,
-        type: Sequelize.STRING
-      }
+        type: Sequelize.STRING,
+        allowNull: false
+      },        
     });
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('Propiedad');
+    await queryInterface.dropTable('propiedad');
   }
 };

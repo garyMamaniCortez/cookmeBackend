@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-  const Propiedad_Ingrediente = sequelize.define('Propiedad_Ingrediente', {
+  const Propiedad_Ingrediente = sequelize.define('propiedad_ingrediente', {
     id_propiedad: {
       allowNull: false,
       primaryKey: true,
@@ -13,16 +13,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER
     }
   }, {
-    tableName: 'Propiedad_Ingrediente',
+    tableName: 'propiedad_ingrediente',
     timestamps: false
   });
 
   Propiedad_Ingrediente.associate = function(models) {
-    Propiedad_Ingrediente.hasMany(models.Ingrediente, {
+    Propiedad_Ingrediente.hasMany(models.propiedad, {
       foreignKey: 'id_propiedad',
       as: 'propiedad'    
     });    
-    Propiedad_Ingrediente.hasMany(models.Propiedad, {
+    Propiedad_Ingrediente.hasMany(models.ingrediente, {
       foreignKey: 'id_ingrediente',
       as: 'ingrediente'
     });

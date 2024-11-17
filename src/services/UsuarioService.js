@@ -1,29 +1,28 @@
-const {Usuario} = require('../../models');
+const {usuario} = require('../../models');
 const bcrypt = require('bcrypt');
 
 module.exports = {
-    async createUsuario(usuario){
-        const hash = await bcrypt.hash(usuario.password, 10);
-        usuario.password = hash;
-        return Usuario.create(usuario);
+    async createUsuario(datosUsuario){
+        datosUsuario.password = bcrypt.hashSync(datosUsuario.password, 10);
+        return usuario.create(datosUsuario);
     },
     async getAllUsuarios(){
-        return Usuario.findAll();
+        return usuario.findAll();
     },
     async getUsuarioById(id){
-        return Usuario.findByPk(id);
+        return usuario.findByPk(id);
     },
-    async updateUsuario(id, usuario){
-        return Usuario.update(usuario, {
+    async updateUsuario(id, datosUsuario){
+        return usuario.update(datosUsuario, {
             where: {
-                id
+                id_usuario: id
             }
         });
     },
     async deleteUsuario(id){
-        return Usuario.destroy({
+        return usuario.destroy({
             where: {
-                id
+                id_usuario: id
             }
         });
     }

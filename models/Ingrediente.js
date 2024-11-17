@@ -1,32 +1,20 @@
-'use strict';
+'use strict'
 
 module.exports = (sequelize, DataTypes) => {
-  const Ingrediente = sequelize.define('Ingrediente', {
+  const Ingrediente = sequelize.define('ingrediente', {
     id_ingrediente: {
-      allowNull: false,
-      autoIncrement: true,
+      type: DataTypes.INTEGER,
       primaryKey: true,
-      type: DataTypes.INTEGER
+      autoIncrement: true,
+      allowNull: false
     },
     nombre_ingrediente: {
-      allowNull: false,
-      type: DataTypes.STRING
-    },
-    preferencia: {
-      allowNull: false,
-      type: DataTypes.BOOLEAN
+      type: DataTypes.STRING,
+      allowNull: false
     }
   }, {
-    tableName: 'Ingrediente',
+    tableName: 'ingrediente',
     timestamps: false
   });
-
-  Ingrediente.associate = function(models) {
-    Ingrediente.hasMany(models.Preferencia_Culinaria, {
-      foreignKey: 'id_ingrediente',
-      as: 'preferencias'
-    });
-  };
-
   return Ingrediente;
 }

@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-  const Comentario = sequelize.define('Comentario', {
+  const Comentario = sequelize.define('comentario', {
     id_comentario: {
       allowNull: false,
       autoIncrement: true,
@@ -22,18 +22,19 @@ module.exports = (sequelize, DataTypes) => {
     },
     fecha: {
       allowNull: false,
-      type: DataTypes.DATE
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW
     }
   }, {
-    tableName: 'Comentario',
+    tableName: 'comentario',
     timestamps: false
   });
   Comentario.associate = function(models) {
-    Comentario.belongsTo(models.Receta, {
+    Comentario.belongsTo(models.receta, {
       foreignKey: 'id_receta',
       as: 'receta'
     });
-    Comentario.belongsTo(models.Usuario, {
+    Comentario.belongsTo(models.usuario, {
       foreignKey: 'id_usuario',
       as: 'usuario'
     });

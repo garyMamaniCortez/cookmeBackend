@@ -25,12 +25,18 @@ module.exports = {
             res.status(400).send(error);
         }
     },
-    async updateTecnicaReceta(req, res) {
+    async getTecnicaRecetaPorTecnica(req, res) {
         try {
-            req.body.id_tecnica = req.params.idTecnica;
-            req.body.id_receta = req.params.idReceta;
-            let tecnicaReceta = await TecnicaRecetaService.updateTecnicaReceta(req.body);
-            res.status(200).send(tecnicaReceta);
+            let tecnicaRecetas = await TecnicaRecetaService.getTecnicaRecetaPorTecnica(req.params.idTecnica);
+            res.status(200).send(tecnicaRecetas);
+        } catch (error) {
+            res.status(400).send(error);
+        }
+    },
+    async getTecnicaRecetaPorReceta(req, res) {
+        try {
+            let tecnicaRecetas = await TecnicaRecetaService.getTecnicaRecetaPorReceta(req.params.idReceta);
+            res.status(200).send(tecnicaRecetas);
         } catch (error) {
             res.status(400).send(error);
         }

@@ -1,24 +1,24 @@
-const {Categoria} = require('../../models');
+const {categoria} = require('../../models');
 
 module.exports = {
-    async createCategoria(categoria){
-        return Categoria.create(categoria);
+    async createCategoria(datosCategoria){
+        return categoria.create(datosCategoria);
     },
     async getAllCategorias(){
-        return Categoria.findAll();
+        return categoria.findAll();
     },
     async getCategoriaById(id){
-        return Categoria.findByPk(id);
+        return categoria.findByPk(id);
     },
-    async updateCategoria(id, categoria){
-        return Categoria.update(categoria, {
+    async updateCategoria(id, datosCategoria){
+        return categoria.update(datosCategoria, {
             where: {
                 id_categoria: id
             }
         });
     },
     async deleteCategoria(id){
-        return Categoria.destroy({
+        return categoria.destroy({
             where: {
                 id_categoria: id
             }
