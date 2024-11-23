@@ -1,4 +1,5 @@
 const {comentario} = require('../../models');
+const {usuario} = require('../../models');
 
 module.exports = {
     async createComentario(datosComentario){
@@ -7,9 +8,20 @@ module.exports = {
     async getAllComentarios(){
         return comentario.findAll();
     },
-    async getComentarioById(id){
-        return comentario.findByPk(id);
-    },
+    async getComentarioById(idReceta) {
+        return comentario.findAll({
+            where: {
+                id_receta: idReceta
+            },
+            include: [
+                {
+                    model: usuario,
+                    as: 'usuario',
+                    attributes: ['nombre_usuario']
+                }
+            ]
+        });
+    },    
     async updateComentario(id, datosComentario){
         return comentario.update(datosComentario, {
             where: {
