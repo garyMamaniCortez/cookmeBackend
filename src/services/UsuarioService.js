@@ -25,5 +25,19 @@ module.exports = {
                 id_usuario: id
             }
         });
+    },
+    async getLoginUsuario(datosUsuario){
+        const datos = await usuario.findOne({
+            where: {
+                email: datosUsuario.email
+            }
+        });
+        var res = null
+        if(datos){
+            if(bcrypt.compareSync(datosUsuario.password, datos.password)){
+                res = datos;                     
+            }
+            return res;
+        }
     }
 };
