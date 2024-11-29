@@ -13,6 +13,7 @@ module.exports = {
         return usuario.findByPk(id);
     },
     async updateUsuario(id, datosUsuario){
+        datosUsuario.password = bcrypt.hashSync(datosUsuario.password, 10);
         return usuario.update(datosUsuario, {
             where: {
                 id_usuario: id
