@@ -15,11 +15,11 @@ module.exports = {
         allowNull: false
       },
       descripcion: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(2000),
         allowNull: false
       },
       instrucciones: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(2000),
         allowNull: false
       },
       tiempo_preparacion: {

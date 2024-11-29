@@ -14,11 +14,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     descripcion: {
       allowNull: false,
-      type: DataTypes.STRING
+      type: DataTypes.STRING(2000)
     },
     instrucciones: {
       allowNull: false,
-      type: DataTypes.STRING
+      type: DataTypes.STRING(2000)
     },
     tiempo_preparacion: {
       allowNull: false,
