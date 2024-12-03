@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const valoracionController = require('../services/ValoracionService');
+const valoracionController = require('../controllers/ValoracionController');
 
 router.post('/valoracion', valoracionController.createValoracion);
 router.get('/valoracion', valoracionController.getAllValoraciones);
