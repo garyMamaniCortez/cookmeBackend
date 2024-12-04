@@ -1,5 +1,6 @@
 const {receta} = require('../../models');
 const {valoracion} = require('../../models');
+const {categoria} = require('../../models');
 
 const { Sequelize } = require('sequelize');
 
@@ -72,12 +73,29 @@ module.exports = {
     },
     async searchReceta(query){
         return receta.findAll({
-            where: Sequelize.where(
-                Sequelize.fn('LOWER', Sequelize.col('nombre_receta')),
+            where: {
+                [Sequelize.Op.or]: [
+                    Sequelize.where(
+                        Sequelize.fn('LOWER', Sequelize.col('nombre_receta')),
+                        {
+                            [Sequelize.Op.like]: `%${query.toLowerCase()}%`
+                        }
+                    ),
+                    Sequelize.where(
+                        Sequelize.fn('LOWER', Sequelize.col('categoria.nombre_categoria')),
+                        {
+                            [Sequelize.Op.like]: `%${query.toLowerCase()}%`
+                        }
+                    )
+                ]
+            },
+            include: [
                 {
-                    [Sequelize.Op.like]: `%${query.toLowerCase()}%`
+                    model: categoria,
+                    as: 'categoria',
+                    attributes: []
                 }
-            ),
+            ]
         });
     }
 };
