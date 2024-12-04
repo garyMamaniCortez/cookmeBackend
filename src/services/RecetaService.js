@@ -69,5 +69,14 @@ module.exports = {
                 id_receta: id
             }
         });
+    },
+    async searchReceta(query){
+        return receta.findAll({
+            where: {
+                nombre_receta: {
+                    [Sequelize.Op.like]: `%${query}%`
+                },
+            },
+        });
     }
 };
