@@ -53,6 +53,10 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'id_usuario',
       as: 'usuario'
     });
+    Receta.hasMany(models.valoracion, {
+      foreignKey: 'id_receta',
+      as: 'valoraciones'
+    });
   };
   return Receta;
 }

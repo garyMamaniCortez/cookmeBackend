@@ -1,14 +1,60 @@
 const {receta} = require('../../models');
+const {valoracion} = require('../../models');
+
+const { Sequelize } = require('sequelize');
 
 module.exports = {
     async createReceta(datosReceta){
         return receta.create(datosReceta);
     },
     async getAllRecetas(){
-        return receta.findAll();
+        return receta.findAll({
+            attributes: [
+                'id_receta', 
+                'nombre_receta', 
+                'descripcion', 
+                'instrucciones', 
+                'tiempo_preparacion', 
+                'tiempo_coccion', 
+                'imagen',
+                'id_categoria',
+                'id_usuario',
+                [Sequelize.cast(Sequelize.fn('AVG', Sequelize.col('valoraciones.valoracion')), 'FLOAT'), 'promedio_valoracion']
+            ],
+            include: [
+                {
+                    model: valoracion,
+                    as: 'valoraciones',
+                    attributes: []
+                }
+            ],
+            group: ['receta.id_receta']
+        });
     },
     async getRecetaById(id){
-        return receta.findByPk(id);
+        return receta.findOne({
+            where: { id_receta: id },
+            attributes: [
+                'id_receta', 
+                'nombre_receta', 
+                'descripcion', 
+                'instrucciones', 
+                'tiempo_preparacion', 
+                'tiempo_coccion', 
+                'imagen',
+                'id_categoria',
+                'id_usuario',
+                [Sequelize.cast(Sequelize.fn('AVG', Sequelize.col('valoraciones.valoracion')), 'FLOAT'), 'promedio_valoracion']
+            ],
+            include: [
+                {
+                    model: valoracion,
+                    as: 'valoraciones',
+                    attributes: []
+                }
+            ],
+            group: ['receta.id_receta']
+        });
     },
     async updateReceta(id, datosReceta){
         return receta.update(datosReceta, {
