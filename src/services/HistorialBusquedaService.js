@@ -7,8 +7,12 @@ module.exports = {
     async getAllHistorialBusqueda() {
         return historial_busqueda.findAll();
     },
-    async getHistorialBusquedaById(id) {
-        return historial_busqueda.findByPk(id);
+    async getHistorialBusquedaById(id_usuario) {
+        return historial_busqueda.findAll({
+            where: {
+                id_usuario: id_usuario
+            },
+        });
     },
     async updateHistorialBusqueda(id, datosHB) {
         return historial_busqueda.update(datosHB, {
