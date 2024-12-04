@@ -72,11 +72,12 @@ module.exports = {
     },
     async searchReceta(query){
         return receta.findAll({
-            where: {
-                nombre_receta: {
-                    [Sequelize.Op.like]: `%${query}%`
-                },
-            },
+            where: Sequelize.where(
+                Sequelize.fn('LOWER', Sequelize.col('nombre_receta')),
+                {
+                    [Sequelize.Op.like]: `%${query.toLowerCase()}%`
+                }
+            ),
         });
     }
 };
