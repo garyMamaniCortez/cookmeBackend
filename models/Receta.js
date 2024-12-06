@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     imagen: {
       allowNull: false,
-      type: DataTypes.STRING
+      type: DataTypes.BLOB('long')
     },
     id_categoria: {
       allowNull: false,

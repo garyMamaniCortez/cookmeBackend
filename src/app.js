@@ -33,6 +33,8 @@ app.use('/api',PreferenciaCulinariaRoutes);
 app.use('/api',PropiedadIngredienteRoutes);
 app.use('/api',RecetaIngredienteRoutes);
 app.use('/api',TecnicaRecetaRoutes);
+app.use(express.json()); // Procesa cuerpos en formato JSON
+app.use(express.urlencoded({ extended: true })); // Procesa datos enviados como application/x-www-form-urlencoded
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

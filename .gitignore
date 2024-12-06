@@ -1,3 +1,6 @@
+# no subir las imagenes de la carpeta uploads
+uploads/
+
 # Logs
 logs
 *.log

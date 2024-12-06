@@ -1,7 +1,6 @@
 const {receta} = require('../../models');
 const {valoracion} = require('../../models');
 const {categoria} = require('../../models');
-
 const { Sequelize } = require('sequelize');
 
 module.exports = {
