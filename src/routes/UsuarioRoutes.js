@@ -8,5 +8,6 @@ router.get('/usuario/:id', UsuarioController.getUsuarioById);
 router.put('/usuario/:id', UsuarioController.updateUsuario);
 router.delete('/usuario/:id', UsuarioController.deleteUsuario);
 router.post('/login', UsuarioController.loginUsuario);
+router.get('/notificaciones/:id', UsuarioController.getNotificaciones)
 
 module.exports = router;
