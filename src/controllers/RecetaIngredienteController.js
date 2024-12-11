@@ -18,17 +18,19 @@ module.exports = {
         }
     },
     async getRecetaIngredientePorReceta(req, res) {
+        const nombre_receta = req.query.nombre_receta;
         try {
-            const recetaIngredientes = await RecetaIngredienteService.getRecetaIngredientePorReceta(req.params.id_receta);
-            res.status(200).send(recetaIngredientes);
+            const recetas = await RecetaIngredienteService.getIngredientePorReceta(nombre_receta);
+            res.status(200).send(recetas);
         } catch (error) {
             res.status(400).send(error);
         }
     },
-    async getRecetaIngredientePorIngrediente(req, res) {
+    async getRecetaPorIngrediente(req, res) {
+        const nombre_ingrediente = req.query.nombre_ingrediente;
         try {
-            const recetaIngredientes = await RecetaIngredienteService.getRecetaIngredientePorIngrediente(req.params.id_ingrediente);
-            res.status(200).send(recetaIngredientes);
+            const recetas = await RecetaIngredienteService.getRecetaPorIngrediente(nombre_ingrediente);
+            res.status(200).send(recetas);
         } catch (error) {
             res.status(400).send(error);
         }

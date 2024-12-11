@@ -5,8 +5,8 @@ const RecetaIngredienteController = require('../controllers/RecetaIngredienteCon
 router.post('/receta-ingrediente', RecetaIngredienteController.createRecetaIngrediente);
 router.get('/receta-ingrediente', RecetaIngredienteController.getAllRecetaIngredientes);
 router.get('/receta-ingrediente/:id_receta/:id_ingrediente', RecetaIngredienteController.getRecetaIngrediente);
-router.get('/receta-ingrediente-receta/:id_receta', RecetaIngredienteController.getRecetaIngredientePorReceta);
-router.get('/receta-ingrediente-ingrediente/:id_ingrediente', RecetaIngredienteController.getRecetaIngredientePorIngrediente);
+router.get('/ingrediente-por-receta', RecetaIngredienteController.getRecetaIngredientePorReceta);
+router.get('/receta-por-ingrediente', RecetaIngredienteController.getRecetaPorIngrediente);
 router.delete('/receta-ingrediente/:id_receta/:id_ingrediente', RecetaIngredienteController.deleteRecetaIngrediente);
 
 module.exports = router;
