@@ -3,9 +3,13 @@ const RecetaService = require('../services/RecetaService');
 module.exports = {
     async createReceta(req, res){
         try {
-            const receta = await RecetaService.createReceta(req.body);
+            console.log(req.file);
+            const { nombre_receta, descripcion, instrucciones, tiempo_preparacion, tiempo_coccion, id_categoria, id_usuario } = req.body;
+            const imagen = req.file ? req.file.path : null;
+            const receta = await RecetaService.createReceta({ nombre_receta, descripcion, instrucciones, tiempo_preparacion, tiempo_coccion, imagen, id_categoria, id_usuario });
             res.status(201).json(receta);
-        }catch (error){
+        }
+        catch (error){
             res.status(400).json({message: error.message});
         }
     },
@@ -14,7 +18,7 @@ module.exports = {
             const recetas = await RecetaService.getAllRecetas();
             res.status(200).json(recetas);
         }catch (error){
-            res.status(400).json({error: 'Error al obtener recetas'});
+            res.status(400).json({message: error.message});
         }
     },
     async getRecetaById(req, res){

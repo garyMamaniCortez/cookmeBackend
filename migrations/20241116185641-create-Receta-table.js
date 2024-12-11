@@ -31,7 +31,7 @@ module.exports = {
         allowNull: false
       },
       imagen: {
-        type: Sequelize.STRING,
+        type: Sequelize.BLOB('long'),
         allowNull: false
       },
       id_categoria: {

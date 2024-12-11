@@ -1,4 +1,5 @@
-const {receta_ingrediente} = require('../../models');
+const {receta_ingrediente, receta, ingrediente} = require('../../models');
+const {Sequelize} = require("sequelize");
 
 module.exports = {
     async createRecetaIngrediente(recetaIngrediente) {
@@ -7,19 +8,37 @@ module.exports = {
     async getAllRecetaIngredientes() {
         return receta_ingrediente.findAll();
     },
-    async getRecetaIngredientePorReceta(id_receta) {
+    async getIngredientePorReceta(querry) {
         return receta_ingrediente.findAll({
-            where: {
-                id_receta
+            include: [{
+                model: ingrediente,
+                as: 'ingrediente'
+            },{
+                model: receta,
+                as: 'receta',
+                where: {
+                    nombre_receta: {
+                        [Sequelize.Op.like]: `%${querry}%`
+                    }
             }
+            }]
         });
     },
-    async getRecetaIngredientePorIngrediente(id_ingrediente) {
+    async getRecetaPorIngrediente(query) {
         return receta_ingrediente.findAll({
-            where: {
-                id_ingrediente
-            }
-        });
+            include: [{
+                model: receta,
+                as: 'receta'
+            }, {
+                model: ingrediente,
+                as: 'ingrediente',
+                where: {
+                    nombre_ingrediente: {
+                        [Sequelize.Op.like]: `%${query}%`
+                    }
+                }
+            }]
+        });            
     },
     async getRecetaIngrediente(id_receta, id_ingrediente) {
         return receta_ingrediente.findOne({
