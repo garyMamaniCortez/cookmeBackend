@@ -52,5 +52,13 @@ module.exports = {
         }catch (error){
             res.status(400).json({message: error.message});
         }
-    }
+    },
+    async getNotificaciones(req, res){
+        try {
+            const notificaciones = await UsuarioService.getNotificaciones(req.params.id);
+            res.status(200).json(notificaciones);
+        }catch (error){
+            res.status(404).json({message: error.message});
+        }
+    },
 };
