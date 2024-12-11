@@ -1,4 +1,4 @@
-const {usuario} = require('../../models');
+const { usuario, valoracion, comentario, receta } = require('../../models');
 const bcrypt = require('bcrypt');
 
 module.exports = {
@@ -40,5 +40,39 @@ module.exports = {
             }
             return res;
         }
+    },
+    async getNotificaciones(idUsuario) {
+        return receta.findAll({
+            where: {
+                id_usuario: idUsuario
+            },
+            attributes: ['nombre_receta'],
+            include: [
+                {
+                    model: comentario,
+                    as: 'comentarios',
+                    attributes: ['id_comentario', 'comentario'],
+                    include: [
+                        {
+                            model: usuario,
+                            as: 'usuario',
+                            attributes: ['nombre_usuario']
+                        }
+                    ]
+                },
+                {
+                    model: valoracion,
+                    as: 'valoraciones',
+                    attributes: ['id_valoracion', 'valoracion'],
+                    include: [
+                        {
+                            model: usuario,
+                            as: 'usuario', // Incluye información del usuario que realizó la valoración
+                            attributes: ['nombre_usuario']
+                        }
+                    ]
+                }
+            ]
+        });
     }
 };
