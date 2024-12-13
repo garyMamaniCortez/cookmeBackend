@@ -16,5 +16,11 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'ingrediente',
     timestamps: false
   });
+  Ingrediente.associate = function(models) {
+    Ingrediente.hasMany(models.receta_ingrediente, {
+      foreignKey: 'id_ingrediente',
+      as: 'receta-ingredientes'
+    });
+  };
   return Ingrediente;
 }

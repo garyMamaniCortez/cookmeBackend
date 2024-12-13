@@ -1,6 +1,8 @@
 const {receta} = require('../../models');
 const {valoracion} = require('../../models');
 const {categoria} = require('../../models');
+const {receta_ingrediente} = require('../../models');
+const {ingrediente} = require('../../models');
 const { Sequelize } = require('sequelize');
 
 module.exports = {
@@ -85,6 +87,12 @@ module.exports = {
                         {
                             [Sequelize.Op.like]: `%${query.toLowerCase()}%`
                         }
+                    ),
+                    Sequelize.where(
+                        Sequelize.fn('LOWER', Sequelize.col('receta-ingredientes->ingrediente.nombre_ingrediente')),
+                        {
+                            [Sequelize.Op.like]: `%${query.toLowerCase()}%`
+                        }
                     )
                 ]
             },
@@ -93,6 +101,18 @@ module.exports = {
                     model: categoria,
                     as: 'categoria',
                     attributes: []
+                }, 
+                {
+                    model: receta_ingrediente,
+                    as: 'receta-ingredientes', // Alias definido en la asociación de receta con receta_ingrediente
+                    attributes: [],
+                    include: [
+                        {
+                            model: ingrediente,
+                            as: 'ingrediente', // Alias definido en la asociación de receta_ingrediente con ingrediente
+                            attributes: [] // No incluir atributos de ingrediente en el resultado
+                        }
+                    ]
                 }
             ]
         });
