@@ -5,6 +5,11 @@ module.exports = {
     async createRecetaIngrediente(recetaIngrediente) {
         return receta_ingrediente.create(recetaIngrediente);
     },
+    async getRecetaIngredienteByNombreIngrediente(nombre){
+        return ingrediente.findOne({
+            where: { nombre_ingrediente: {[Sequelize.Op.like]: `%${nombre}%`} }
+        });
+    },
     async getAllRecetaIngredientes() {
         return receta_ingrediente.findAll();
     },

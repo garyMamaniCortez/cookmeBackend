@@ -1,4 +1,6 @@
 const RecetaService = require('../services/RecetaService');
+const RecetaIngredienteService = require('../services/RecetaIngredienteService');
+const IngredienteService = require('../services/IngredienteService');
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../../config/config.js')[env];
 
@@ -6,9 +8,22 @@ module.exports = {
     async createReceta(req, res){
         try {
             console.log(req.file);
-            const { nombre_receta, descripcion, instrucciones, tiempo_preparacion, tiempo_coccion, id_categoria, id_usuario } = req.body;
+            const { nombre_receta, descripcion, instrucciones, tiempo_preparacion, tiempo_coccion, id_categoria, id_usuario, ingredientes } = req.body;
             const imagen = req.file ? req.file.path : null;
             const receta = await RecetaService.createReceta({ nombre_receta, descripcion, instrucciones, tiempo_preparacion, tiempo_coccion, imagen, id_categoria, id_usuario });
+            if (receta){
+                const ingredientesArray = ingredientes.split(',').map(ing => ing.trim());
+
+                for (const nombreIngrediente of ingredientesArray) {
+                    const ingrediente = await RecetaIngredienteService.getRecetaIngredienteByNombreIngrediente(nombreIngrediente);
+                    if(ingrediente)
+                        await RecetaIngredienteService.createRecetaIngrediente({ "id_receta": receta.id_receta, "id_ingrediente": ingrediente.id_ingrediente});
+                    else{
+                        const nuevo_ingrediente = await IngredienteService.createIngrediente({ "nombre_ingrediente": nombreIngrediente });
+                        await RecetaIngredienteService.createRecetaIngrediente({ "id_receta": receta.id_receta, "id_ingrediente": nuevo_ingrediente.id_ingrediente});
+                    }
+                }
+            }
             res.status(201).json(receta);
         }
         catch (error){
