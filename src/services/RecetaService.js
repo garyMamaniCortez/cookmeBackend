@@ -37,12 +37,12 @@ module.exports = {
         return receta.findOne({
             where: { id_receta: id },
             attributes: [
-                'id_receta', 
-                'nombre_receta', 
-                'descripcion', 
-                'instrucciones', 
-                'tiempo_preparacion', 
-                'tiempo_coccion', 
+                'id_receta',
+                'nombre_receta',
+                'descripcion',
+                'instrucciones',
+                'tiempo_preparacion',
+                'tiempo_coccion',
                 'imagen',
                 'id_categoria',
                 'id_usuario',
@@ -53,9 +53,27 @@ module.exports = {
                     model: valoracion,
                     as: 'valoraciones',
                     attributes: []
+                },
+                {
+                    model: receta_ingrediente,
+                    as: 'receta-ingredientes', // Alias definido en las asociaciones
+                    attributes: ['id_ingrediente'],
+                    include: [
+                        {
+                            model: ingrediente,
+                            as: 'ingrediente', // Alias definido en las asociaciones
+                            attributes: ['nombre_ingrediente'] // Sólo queremos el nombre del ingrediente
+                        }
+                    ]
                 }
             ],
-            group: ['receta.id_receta']
+            group: [
+                'receta.id_receta',
+                'receta-ingredientes.id_receta',
+                'receta-ingredientes.id_ingrediente',
+                'receta-ingredientes->ingrediente.id_ingrediente',
+                'receta-ingredientes->ingrediente.nombre_ingrediente'
+            ]
         });
     },
     async updateReceta(id, datosReceta){

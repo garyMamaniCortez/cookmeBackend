@@ -47,6 +47,8 @@ module.exports = {
     async getRecetaById(req, res){
         try {
             const receta = await RecetaService.getRecetaById(req.params.id);
+            receta.dataValues.ingredientes = receta['receta-ingredientes'].map(ri => ri.ingrediente.nombre_ingrediente).join(', ');
+            delete receta.dataValues['receta-ingredientes'];
             if (receta.imagen.includes("\\")){
                 receta.imagen = `${config.url}/api/uploads/${receta.id_receta}`;
             }
