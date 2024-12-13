@@ -96,5 +96,10 @@ module.exports = {
                 }
             ]
         });
-    }
+    },
+    async getUserRecetas(id){
+        return receta.findAll({
+            where: { id_usuario: id }
+        });
+    },
 };

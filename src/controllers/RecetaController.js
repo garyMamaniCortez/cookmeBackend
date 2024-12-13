@@ -83,5 +83,19 @@ module.exports = {
         } catch (error) {
             res.status(400).json({ message: error.message });
         }
+    },
+    async getRecetasByUserId(req, res){
+        try {
+            const recetas = await RecetaService.getUserRecetas(req.params.id);
+            const transformedRecetas = recetas.map(receta => {
+                if (receta.imagen.includes("\\")){
+                    receta.imagen = `${config.url}/api/uploads/${receta.id_receta}`;
+                }
+                return receta;
+            });
+            res.status(200).json(transformedRecetas);
+        }catch (error){
+            res.status(400).json({message: error.message});
+        }
     }
 };

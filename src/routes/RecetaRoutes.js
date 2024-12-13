@@ -7,6 +7,7 @@ router.post('/receta', upload.single('imagen'), RecetaController.createReceta);
 router.post('/receta/buscar', RecetaController.searchReceta);
 router.get('/receta', RecetaController.getRecetas);
 router.get('/receta/:id', RecetaController.getRecetaById);
+router.get('/receta/usuario/:id', RecetaController.getRecetasByUserId);
 router.get('/uploads/:id', RecetaController.getImageById);
 router.put('/receta/:id', RecetaController.updateReceta);
 router.delete('/receta/:id', RecetaController.deleteReceta);
